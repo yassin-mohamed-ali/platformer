@@ -1,4 +1,3 @@
-package platformer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,13 +5,15 @@ import java.awt.event.ActionEvent;
 
 
 public class main extends JPanel {
-    int x = 700;
+    int x = 800;
     int x2 = 400;
     int py = 300;
     int score = 0;
     boolean jump = false;
     boolean fall = false;
     boolean alive = true;
+    Image playerImage = new ImageIcon("assets/player.png").getImage();
+    Image objImage = new ImageIcon("assets/object.png").getImage();
     
    
     public static final int WIDTH = 800;
@@ -58,7 +59,7 @@ public class main extends JPanel {
         public void actionPerformed(ActionEvent e) {
             if (!alive) {
                 py = 300;
-                x = 700;
+                x = 800;
                 x2 = 400;
                 alive = true;
                 jump = false;
@@ -79,12 +80,12 @@ public class main extends JPanel {
         g.setColor(Color.green);
         g.fillRect(0, 500, 800, 600);
         g.setColor(Color.blue);
-        g.fillRect(100, py, 50, 200);
+        g.drawImage(playerImage,100, py, 50, 200, this);
         Rectangle playerRectangle = new Rectangle(100, py, 50, 200);
         g.setColor(Color.red);
-        g.fillRect(x, 400, 20, 100);
+        g.drawImage(objImage, x, 400, 20, 100, this);
         Rectangle objRectangle = new Rectangle(x, 400, 20, 100);
-        g.fillRect(x2, 400, 20, 100);
+        g.drawImage(objImage, x2, 400, 20, 100, this);
         Rectangle obj2Rectangle = new Rectangle(x2, 400, 20, 100);
         
         if (playerRectangle.intersects(objRectangle) || playerRectangle.intersects(obj2Rectangle)){
