@@ -23,10 +23,10 @@ public class main extends JPanel {
         
         Timer timer = new Timer(1, e -> {
             if (alive){
-            x -= 1;
+                x--;
             
-            if (x < -20) { 
-                x = WIDTH;
+                if (x < -20) { 
+                    x = WIDTH;
             }
             repaint();
         }
@@ -43,7 +43,8 @@ public class main extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (py == 300){
-            jump = true;}
+                jump = true;
+            }
         }
     });
     getInputMap(WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ENTER"), "restart");
@@ -76,29 +77,34 @@ public class main extends JPanel {
         g.setColor(Color.red);
         g.fillRect(x, 400, 20, 100);
         Rectangle objRectangle = new Rectangle(x, 400, 20, 100);
+        
         if (playerRectangle.intersects(objRectangle)){
             g.setColor(Color.BLACK);
             g.drawString("GAME OVER!", 300, 300);
             g.drawString("PRESS ENTER TO RESTART", 300, 400);
             alive = false;
         }
-        if (alive) {
-        if (jump) {
-            if (py > 150){
-            py -= 1;
+        if (x == 10){
+            score++;
         }
-            else {
+        if (alive) {
+        
+            if (jump) {
+                if (py > 150){
+                    py -= 1;
+        }
+                else {
                 jump = false;
                 fall = true;
             }
 
         }
-        if(fall) {
-            if (py < 300) {
-                py += 1;
+            if(fall) {
+                if (py < 300) {
+                    py += 1;
             }
-            else {
-                fall = false;
+                else {
+                    fall = false;
             }
         }}
     }
