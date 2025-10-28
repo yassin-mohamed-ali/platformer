@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 
 public class main extends JPanel {
     int x = 700;
+    int x2 = 400;
     int py = 300;
     int score = 0;
     boolean jump = false;
@@ -23,11 +24,15 @@ public class main extends JPanel {
         
         Timer timer = new Timer(1, e -> {
             if (alive){
-                x--;
+                x-=2;
+                x2-=2;
             
                 if (x < -20) { 
                     x = WIDTH;
-            }
+                }
+                if (x2 < -20) {
+                    x2 = WIDTH;
+                }
             repaint();
         }
         });
@@ -54,9 +59,11 @@ public class main extends JPanel {
             if (!alive) {
                 py = 300;
                 x = 700;
+                x2 = 400;
                 alive = true;
                 jump = false;
                 fall = false;
+                score = 0;
             }
         }
     });
@@ -77,21 +84,23 @@ public class main extends JPanel {
         g.setColor(Color.red);
         g.fillRect(x, 400, 20, 100);
         Rectangle objRectangle = new Rectangle(x, 400, 20, 100);
+        g.fillRect(x2, 400, 20, 100);
+        Rectangle obj2Rectangle = new Rectangle(x2, 400, 20, 100);
         
-        if (playerRectangle.intersects(objRectangle)){
+        if (playerRectangle.intersects(objRectangle) || playerRectangle.intersects(obj2Rectangle)){
             g.setColor(Color.BLACK);
             g.drawString("GAME OVER!", 300, 300);
             g.drawString("PRESS ENTER TO RESTART", 300, 400);
             alive = false;
         }
-        if (x == 10){
+        if (x == 10 || x2 == 10){
             score++;
         }
         if (alive) {
         
             if (jump) {
                 if (py > 150){
-                    py -= 1;
+                    py -= 2;
         }
                 else {
                 jump = false;
@@ -101,7 +110,7 @@ public class main extends JPanel {
         }
             if(fall) {
                 if (py < 300) {
-                    py += 1;
+                    py += 2;
             }
                 else {
                     fall = false;
