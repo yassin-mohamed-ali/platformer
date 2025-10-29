@@ -121,7 +121,7 @@ public class main extends JPanel {
 
     public static void main(String[] args) {
         
-        JFrame frame = new JFrame("window name");
+        JFrame frame = new JFrame("platformer");
         main gamePanel = new main();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
